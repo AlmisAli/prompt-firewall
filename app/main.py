@@ -1,15 +1,15 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from app.scanner import scan_prompt
 from app.policy import apply_policy
 from app.schemas import ScanRequest, ScanResponse
-from app.utils import log_scan  
+from app.utils import log_scan
 
 app = FastAPI()
 
-
 @app.get("/")
 def root():
-    return {"message": "Prompt Security Firewall is running"}
+    return RedirectResponse(url="/docs")
 
 
 @app.post("/scan", response_model=ScanResponse)
